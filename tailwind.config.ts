@@ -17,6 +17,7 @@ const config: Config = {
           500: '#0070F3',
           600: '#2F6FEB',
         },
+        customYellow: '#fde047',
       },
     },
     keyframes: {
@@ -29,4 +30,5 @@ const config: Config = {
   },
   plugins: [require('@tailwindcss/forms')],
 };
+
 export default config;

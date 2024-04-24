@@ -1,4 +1,5 @@
-import { Revenue } from './definitions';
+import { Flight, Revenue } from './definitions';
+import { SHA256 } from "crypto-js";
 
 export const formatCurrency = (amount: number) => {
   return (amount / 100).toLocaleString('en-US', {
@@ -67,3 +68,68 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
     totalPages,
   ];
 };
+
+
+function generateFlightHash(flight: Flight): string {
+  return SHA256(JSON.stringify(flight)).toString();
+}
+
+const hardcodedFlights: Flight[] = [
+  {
+    arrAirport: "AMS",
+    carrier1: "KLM",
+    depAirport: "DXB",
+    localArrTime: "2024-02-25T13:50:44.0789577+00:00",
+    localDepTime: "2024-02-25T05:01:42.2171075+00:00",
+    flightNo1: "KL101",
+    km: 5000,
+    localDaysOfOp: "1234567",
+    opCar: "KLM",
+    specificAcft: "Boeing 777",
+    stops: 0,
+    elapsedTime: 500,
+    seatsTotal: 300,
+    frequency: 7,
+    timeSeries: 1,
+  },
+  {
+    arrAirport: "DXB",
+    carrier1: "Qantas",
+    depAirport: "DEN",
+    localArrTime: "2024-02-16T21:15:14.7372553+00:00",
+    localDepTime: "2024-02-16T17:47:52.8762196+00:00",
+    flightNo1: "QF22",
+    km: 8000,
+    localDaysOfOp: "1234567",
+    opCar: "Qantas",
+    specificAcft: "Airbus A380",
+    stops: 0,
+    elapsedTime: 500,
+    seatsTotal: 500,
+    frequency: 7,
+    timeSeries: 1,
+  },
+];
+
+function filterFlightsForCapacityReport(flights: Flight[], filterText: string): Flight[] {
+  return flights.filter(
+    (flight) =>
+      flight.arrAirport.toLowerCase().includes(filterText.toLowerCase()) ||
+      flight.carrier1.toLowerCase().includes(filterText.toLowerCase()) ||
+      flight.depAirport.toLowerCase().includes(filterText.toLowerCase()) ||
+      flight.localArrTime.toLowerCase().includes(filterText.toLowerCase()) ||
+      flight.localDepTime.toLowerCase().includes(filterText.toLowerCase()) ||
+      flight.flightNo1.toLowerCase().includes(filterText.toLowerCase()) ||
+      flight.km.toString().includes(filterText.toLowerCase()) ||
+      flight.localDaysOfOp.toLowerCase().includes(filterText.toLowerCase()) ||
+      flight.opCar.toLowerCase().includes(filterText.toLowerCase()) ||
+      flight.specificAcft.toLowerCase().includes(filterText.toLowerCase()) ||
+      flight.stops.toString().includes(filterText.toLowerCase()) ||
+      flight.elapsedTime.toString().includes(filterText.toLowerCase()) ||
+      flight.seatsTotal.toString().includes(filterText.toLowerCase()) ||
+      flight.frequency.toString().includes(filterText.toLowerCase()) ||
+      flight.timeSeries.toString().includes(filterText.toLowerCase())
+  );
+}
+
+export { generateFlightHash, hardcodedFlights, filterFlightsForCapacityReport };

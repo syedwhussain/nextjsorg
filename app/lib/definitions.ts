@@ -86,3 +86,23 @@ export type InvoiceForm = {
   amount: number;
   status: 'pending' | 'paid';
 };
+
+export interface Flight {
+  arrAirport: string;
+  carrier1: string;
+  depAirport: string;
+  localArrTime: string;
+  localDepTime: string;
+  flightNo1: string;
+  km: number;
+  localDaysOfOp: string;
+  opCar: string;
+  specificAcft: string;
+  stops: number;
+  elapsedTime: number;
+  seatsTotal: number;
+  frequency: number;
+  timeSeries: number;
+}
+
+

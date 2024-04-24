@@ -15,6 +15,11 @@ const links = [
   { name: 'Modules', href: '/dashboard', icon: HomeIcon },
   {
     name: 'Capacity Report',
+    href: '/dashboard/capacityreport',
+    icon: DocumentDuplicateIcon,
+  },
+  {
+    name: 'Invoices',
     href: '/dashboard/invoices',
     icon: DocumentDuplicateIcon,
   },
@@ -23,7 +28,7 @@ const links = [
 
 export default function NavLinks() {
   const pathname = usePathname();
-  
+
   return (
     <>
       {links.map((link) => {
@@ -33,9 +38,10 @@ export default function NavLinks() {
             key={link.name}
             href={link.href}
             className={clsx(
-              'flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
+              'flex h-[48px] grow items-center justify-center gap-2 rounded-md p-3 text-sm font-medium md:flex-none md:justify-start md:p-2 md:px-3',
               {
-                'bg-sky-100 text-blue-600': pathname === link.href,
+                'bg-black text-white hover:bg-customYellow hover:text-black': pathname !== link.href,
+                'bg-customYellow text-black': pathname === link.href,
               },
             )}
           >
